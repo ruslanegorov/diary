@@ -11,21 +11,21 @@ Colors (red through purple) show mood at a glance
 
 ## Features
 
-* Supports Russian and English
-* Email auth
-* Firebase Database sync
-* Some accessibility work
-* Dark theme
-* Firebase emulators in dev mode (require java)
+- Supports Russian and English
+- Email auth
+- Firebase Database sync
+- Some accessibility work
+- Dark theme
+- Firebase emulators in dev mode (require java)
 
 ## Tech used
 
-* React (hooks, context)
-* styled-components
-* wouter
-* React Helmet
-* Firebase Auth, Realtime Database
-* Hosted on Firebase Hosting
-* ESLint, Prettier
-* Vite
-* Vite-plugin-pwa (internally workbox)
+- React (hooks, context)
+- styled-components
+- wouter
+- React Helmet
+- Firebase Auth, Realtime Database
+- Hosted on Firebase Hosting
+- ESLint, Prettier
+- Vite
+- Vite-plugin-pwa (internally workbox)

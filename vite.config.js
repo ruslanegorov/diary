@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const assetsList = [
@@ -18,7 +18,6 @@ export default defineConfig({
         plugins: ['babel-plugin-styled-components'],
       },
     }),
-    splitVendorChunkPlugin(),
     VitePWA({
       includeAssets: [
         ...assetsList.map((h) => `/assets/light/${h}`),
@@ -31,4 +30,21 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          const chunks = ['i18n', 'react', 'firebase'];
+          const found = chunks.find((v) => id.includes(v));
+          if (found) return found;
+
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+
+          return null;
+        },
+      },
+    },
+  },
 });

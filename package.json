@@ -6,10 +6,11 @@
     "vite-dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prettier": "prettier ./{src,public}/**/*.{js,jsx,css,json} --w",
+    "prettier": "prettier ./src/**/*.{js,jsx,css} ./public/**/*.json --w",
     "eslint": "eslint --ext js,jsx src --fix",
-    "lint": "npm run eslint && npm run prettier",
-    "deploy": "npm run build && firebase deploy"
+    "test": "npm run prettier && npm run eslint",
+    "deploy": "npm run build && firebase deploy",
+    "prepare": "husky"
   },
   "dependencies": {
     "firebase": "^10.8.1",
@@ -31,7 +32,10 @@
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-simple-import-sort": "^12.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
     "vite": "^5.1.5",
