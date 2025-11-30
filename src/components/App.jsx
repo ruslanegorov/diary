@@ -1,5 +1,8 @@
+import {
+  Helmet as ReactHelmet,
+  HelmetProvider,
+} from '@dr.pogodin/react-helmet';
 import { useContext, useEffect, useState } from 'react';
-import ReactHelmet from 'react-helmet';
 import styled from 'styled-components';
 import { Redirect, Route, Switch } from 'wouter';
 
@@ -85,27 +88,29 @@ function Helmet() {
 
   return (
     <ErrorBoundary>
-      <ReactHelmet>
-        <meta
-          name="theme-color"
-          content={colorScheme === 'light' ? '#ffffff' : '#000000'}
-        />
-        <link
-          rel="icon"
-          href={`/assets/${colorScheme}/icon.png`}
-          type="image/png"
-        />
-        <link
-          rel="icon"
-          href={`/assets/${colorScheme}/icon.svg`}
-          type="image/svg+xml"
-        />
-        <link
-          rel="apple-touch-icon"
-          href={`/assets/${colorScheme}/apple-touch-icon.png`}
-        />
-        <link rel="manifest" href={`/assets/${colorScheme}/manifest.json`} />
-      </ReactHelmet>
+      <HelmetProvider>
+        <ReactHelmet>
+          <meta
+            name="theme-color"
+            content={colorScheme === 'light' ? '#ffffff' : '#000000'}
+          />
+          <link
+            rel="icon"
+            href={`/assets/${colorScheme}/icon.png`}
+            type="image/png"
+          />
+          <link
+            rel="icon"
+            href={`/assets/${colorScheme}/icon.svg`}
+            type="image/svg+xml"
+          />
+          <link
+            rel="apple-touch-icon"
+            href={`/assets/${colorScheme}/apple-touch-icon.png`}
+          />
+          <link rel="manifest" href={`/assets/${colorScheme}/manifest.json`} />
+        </ReactHelmet>
+      </HelmetProvider>
 
       <AlertContext.Provider value={[alert, setAlert]}>
         <LoadingContext.Provider value={[loadingStates, setLoadingStates]}>

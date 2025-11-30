@@ -33,17 +33,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          const chunks = ['i18n', 'react', 'firebase'];
-          const found = chunks.find((v) => id.includes(v));
-          if (found) return found;
-
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-
-          return null;
-        },
+        manualChunks: (id) => id.includes('node_modules') ? 'vendor' : null,
       },
     },
   },
