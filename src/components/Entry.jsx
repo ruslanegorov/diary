@@ -1,5 +1,5 @@
 import { getDatabase, ref, set } from 'firebase/database';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import TextareaAutosize from 'react-textarea-autosize';
 import styled from 'styled-components';
