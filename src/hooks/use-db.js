@@ -1,34 +1,33 @@
 import { getDatabase, onValue, ref } from 'firebase/database';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const db = getDatabase();
 
 function useDb(path) {
-  const pathRef = useRef();
-  const [data, _setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadedPath, setLoadedPath] = useState(null);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    _setData(null);
-    setLoading(true);
-    setError(null);
-
-    pathRef.current = ref(db, path);
     return onValue(
-      pathRef.current,
+      ref(db, path),
       (snapshot) => {
-        _setData(snapshot.val());
-        setLoading(false);
+        setData(snapshot.val());
+        setError(null);
+        setLoadedPath(path);
       },
       (error) => {
+        setData(null);
         setError(error);
-        setLoading(false);
+        setLoadedPath(path);
       },
     );
   }, [path]);
 
-  return [data, loading, error];
+  // Loading is true when the path doesn't match what we have data for
+  const loading = loadedPath !== path;
+
+  return [loading ? null : data, loading, loading ? null : error];
 }
 
 export default useDb;

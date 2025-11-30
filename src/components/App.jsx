@@ -69,10 +69,15 @@ function App() {
   );
 }
 
+const colorShemeDefault = window.matchMedia('(prefers-color-scheme: dark)')
+  .matches
+  ? 'dark'
+  : 'light';
+
 function Helmet() {
   const [alert, setAlert] = useState(null);
   const [loadingStates, setLoadingStates] = useState([]);
-  const [colorScheme, setColorScheme] = useState('light');
+  const [colorScheme, setColorScheme] = useState(colorShemeDefault);
 
   useEffect(() => {
     const listener = (e) => {
@@ -80,8 +85,6 @@ function Helmet() {
     };
 
     const match = window.matchMedia('(prefers-color-scheme: dark)');
-    setColorScheme(match.matches ? 'dark' : 'light');
-
     match.addEventListener('change', listener);
     return () => match.removeEventListener('change', listener);
   }, []);

@@ -80,7 +80,6 @@ function AccountAction({ action }) {
     }
   };
 
-  // eslint-disable-next-line default-case
   switch (action) {
     case 'change-email':
       return (

@@ -5,25 +5,24 @@ const auth = getAuth();
 
 function useUser() {
   const [user, setUser] = useState(auth.currentUser);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !auth.currentUser);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setUser(null);
-    setLoading(true);
-    setError(null);
-
-    return onAuthStateChanged(
+    const unsubscribe = onAuthStateChanged(
       auth,
-      (user) => {
-        setUser(user);
+      (nextUser) => {
+        setUser(nextUser);
         setLoading(false);
+        setError(null);
       },
-      (error) => {
-        setError(error);
+      (firebaseError) => {
+        setError(firebaseError);
         setLoading(false);
       },
     );
+
+    return unsubscribe;
   }, []);
 
   return [user, loading, error];

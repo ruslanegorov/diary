@@ -81,7 +81,15 @@ const Textarea = styled(TextareaAutosize)`
 
 function Entry({ year, month, date, isToday, hidden }) {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(isToday);
+  const [openState, setOpenState] = useState({ year, month, isOpen: isToday });
+
+  // Reset isOpen to isToday when year/month changes
+  const isOpen =
+    openState.year === year && openState.month === month
+      ? openState.isOpen
+      : isToday;
+  const setIsOpen = (value) => setOpenState({ year, month, isOpen: value });
+
   const [user, userLoading] = useUser();
   const dataRoot = `users/${user?.uid}/${year}/${month}/${date}`;
   const [data, dataLoading, dataError] = useDb(dataRoot);
@@ -89,10 +97,6 @@ function Entry({ year, month, date, isToday, hidden }) {
   const loading = userLoading || dataLoading;
 
   if (dataError) throw dataError;
-
-  useEffect(() => {
-    setIsOpen(isToday);
-  }, [isToday, year, month]);
 
   const handleTextChange = (event) => {
     set(ref(db, `${dataRoot}/text`), event.target.value || null);
