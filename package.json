@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "prettier": "prettier ./src/**/*.{js,jsx,css} ./public/**/*.json --w",
     "eslint": "eslint --ext js,jsx src --fix",
-    "test": "run-s prettier eslint",
+    "test": "run-s eslint prettier",
     "deploy": "npm run build && firebase deploy",
     "prepare": "husky"
   },
@@ -33,7 +33,6 @@
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",

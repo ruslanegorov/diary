@@ -1,7 +1,6 @@
 import { defineConfig } from 'eslint/config';
 import eslintJs from '@eslint/js';
-import prettier from 'eslint-plugin-prettier';
-import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -12,11 +11,15 @@ export default defineConfig([
   react.configs.flat.recommended,
   react.configs.flat['jsx-runtime'],
   reactHooks.configs.flat.recommended,
-  prettierRecommended,
+  eslintConfigPrettier,
   {
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     plugins: {
       'simple-import-sort': simpleImportSort,
-      prettier,
       react,
       'react-hooks': reactHooks,
     },
